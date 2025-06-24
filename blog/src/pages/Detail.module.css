@@ -1,0 +1,93 @@
+/* src/pages/Detail.module.css */
+
+/* 공통 페이드 인 애니메이션 */
+.start {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.start.end {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 알림창 페이드 인 */
+.alert-warning {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 이미지 호버 줌 효과 */
+.col-md-6 img {
+    transition: transform 0.4s ease;
+}
+
+.col-md-6 img:hover {
+    transform: scale(1.05);
+}
+
+/* 주문 버튼 리플 효과 */
+.btn-danger {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-danger::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.4s ease;
+}
+
+.btn-danger:hover::after {
+    left: 100%;
+}
+
+/* 네비게이션 탭 언더라인 애니메이션 */
+.nav-tabs .nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-tabs .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #dc3545;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover::after,
+.nav-tabs .nav-link.active::after {
+    width: 100%;
+    left: 0;
+}
+
+/* 탭 콘텐츠 슬라이드 인 */
+.start+.start {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.start.end+.end {
+    opacity: 1;
+    transform: translateX(0);
+}

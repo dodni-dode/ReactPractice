@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Nav from 'react-bootstrap/Nav'
 import styles from './Detail.module.css'
 import {
-  addItem, addWatchedId, removeWatchedId
+  addItem, addWatched, removeWatched
 } from '../store'
 
 
@@ -29,9 +29,16 @@ function Detail({ shoes }) {
 
   useEffect(() => {
     if (!product) return
-    dispatch(removeWatchedId(product.id))
-    dispatch(addWatchedId(product.id))
-  }, [product])
+
+    const watched = JSON.parse(sessionStorage.getItem('watched')) || []
+
+    const updated = watched.filter(id => id !== product.id)
+    updated.push(product.id)
+    sessionStorage.setItem('watched', JSON.stringify(updated))
+
+    dispatch(removeWatched(product.id))
+    dispatch(addWatched(product))
+  }, [])
 
   useEffect(() => {
     if (!product) return

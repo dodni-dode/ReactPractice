@@ -1,31 +1,33 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import userCartInfo from "./store/userCartInfo";
+import userInfo from "./store/userInfo";
 
-let userCartInfo = createSlice({
-  name: 'userCartInfo',
-  initialState: [
-    { id: 0, name: 'White and Black', count: 2 },
-    { id: 2, name: 'Grey Yordan', count: 1 }
-  ],
+export const { plusCount, minusCount, addItem, removeItem } = userCartInfo.actions;
+export const { changeName, changeAge } = userInfo.actions;
+
+const initialState = {
+  userWatchedIds: []  // number[]만 저장
+}
+
+const watchedSlice = createSlice({
+  name: 'watched',
+  initialState,
   reducers: {
-    plusCount(state, action) {
-      let index = state.findIndex(item => item.id === action.payload);
-      if (index !== -1) {
-        state[index].count++;
-      }
+    addWatchedId(state, action) {
+      const id = action.payload
+      state.userWatchedIds = state.userWatchedIds.filter(i => i !== id).concat(id)
     },
-    minusCount(state, action) {
-      let index = state.findIndex(item => item.id === action.payload);
-      if (index !== -1 && state[index].count > 0) {
-        state[index].count--;
-      }
-    },
+    removeWatchedId(state, action) {
+      state.userWatchedIds = state.userWatchedIds.filter(i => i !== action.payload)
+    }
   }
-});
-
-export const { plusCount, minusCount } = userCartInfo.actions;
+})
+export const { addWatchedId, removeWatchedId } = watchedSlice.actions
 
 export default configureStore({
   reducer: {
-    userCartInfo: userCartInfo.reducer
+    userCartInfo: userCartInfo.reducer,
+    userInfo: userInfo.reducer,
+    watchedSlice: watchedSlice.reducer
   }
 });

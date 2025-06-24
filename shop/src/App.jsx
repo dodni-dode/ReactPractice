@@ -1,10 +1,11 @@
 // src/App.jsx
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import initialShoes from './data.jsx'
 import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import ShopNavbar from './components/ShopNavbar.jsx'
+import RecentlyViewed from './components/RecentlyViewed.jsx'
 import Detail from './pages/Detail.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
@@ -20,7 +21,6 @@ export default function App() {
   const [buffer, setBuffer] = useState([])
   const [loading, setLoading] = useState(false)
   const [btnDisabled, setBtnDisabled] = useState(false)
-  const [재고, set재고] = useState([10, 11, 12])
 
   // 제목 가나다 정렬함
   const onSort = () => {
@@ -62,6 +62,7 @@ export default function App() {
 
   return (
     <>
+      <RecentlyViewed shoes={shoes} />
       <ShopNavbar />
       <Routes>
         <Route
