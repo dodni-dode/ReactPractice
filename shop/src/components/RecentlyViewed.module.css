@@ -1,35 +1,69 @@
 /* src/components/RecentlyViewed.module.css */
 .fixedContainer {
     position: fixed;
-    top: 70px;
+    top: 64px;
     right: 20px;
-    width: 220px;
+    width: 200px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     background: #fff;
-    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 8px;
+    /* padding: 8px; */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
+.itemsContainer {
+    max-height: 180px;
+    /* 보여줄 아이템 3개 높이 (li 높이+gap 고려) */
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    /* CSS로 부드러운 스크롤 지정 */
+}
+
+.topBtn {
+    all: unset;
+    cursor: pointer;
+}
+
 .title {
-    margin: 0 0 8px;
+    margin: 0;
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
+}
+
+.topBtn {
+    width: 100%;
+    background-color: rgb(176, 176, 176);
+    margin-top: 8px;
+}
+
+.title.cart {
+    background-color: #2b2525;
+    color: #fff;
+    padding: 8px;
+}
+
+.title.str {
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 .list {
-    list-style: none;
     margin: 0;
     padding: 0;
+    transition: transform 0.3s ease;
 }
+
 
 .item {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px;
+
 }
 
 .link {
@@ -40,14 +74,28 @@
 }
 
 .thumb {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     object-fit: cover;
     margin-right: 6px;
     border-radius: 4px;
 }
 
 .name {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.2;
+}
+
+.arrowBtn {
+    all: unset;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+    background: #b0b0b0;
+}
+
+.arrowBtn[disabled] {
+    opacity: .3;
+    cursor: default;
 }
