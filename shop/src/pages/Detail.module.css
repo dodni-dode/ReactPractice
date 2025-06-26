@@ -1,93 +1,156 @@
-/* src/pages/Detail.module.css */
+/* src/components/RecentlyWatched.module.css */
 
-/* 공통 페이드 인 애니메이션 */
-.start {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+:root {
+	/* =====================================================================
+     공통 변수 선언
+     - 색상, 반경, 그림자, 폰트 크기 등
+     ===================================================================== */
+	--color-background: #fff;
+	--color-divider: #ddd;
+	--color-cart-bg: #2b2525;
+	--color-btn-bg: rgb(176, 176, 176);
+	--radius-container: 8px;
+	--radius-item: 4px;
+	--radius-thumb: 4px;
+	--radius-btn: 8px;
+	--box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	--font-size-title: 14px;
+	--font-size-name: 15px;
 }
 
-.start.end {
-    opacity: 1;
-    transform: translateY(0);
+/* =======================================================================
+   고정 레이아웃 컨테이너
+   - 네비게이션 바 아래에 위치
+   - 둥근 모서리와 그림자 적용
+   ======================================================================= */
+.fixedContainer {
+	position: fixed;
+	top: 64px;
+	right: 20px;
+	width: 200px;
+	max-height: calc(100vh - 40px);
+	background: var(--color-background);
+	border-radius: var(--radius-container);
+	box-shadow: var(--box-shadow);
+	z-index: 1000;
 }
 
-/* 알림창 페이드 인 */
-.alert-warning {
-    animation: fadeIn 0.4s ease-out;
+/* =======================================================================
+   스크롤 가능한 상품 목록 래퍼
+   - 최대 높이 설정
+   - 상하단 구분선 추가
+   ======================================================================= */
+.itemsContainer {
+	max-height: 180px;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	border-top: 1px solid var(--color-divider);
+	border-bottom: 1px solid var(--color-divider);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+/* =======================================================================
+   상품 리스트 기본 스타일 초기화
+   ======================================================================= */
+.list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-/* 이미지 호버 줌 효과 */
-.col-md-6 img {
-    transition: transform 0.4s ease;
+/* =======================================================================
+   개별 아이템 카드
+   - 여백 및 테두리 적용
+   - 둥근 모서리
+   ======================================================================= */
+.item {
+	display: flex;
+	align-items: center;
+	padding: 6px;
+	margin: 4px;
+	border: 1px solid var(--color-divider);
+	border-radius: var(--radius-item);
 }
 
-.col-md-6 img:hover {
-    transform: scale(1.05);
+/* =======================================================================
+   링크 스타일
+   - 클릭 가능한 영역 전체를 커버
+   ======================================================================= */
+.link {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: inherit;
 }
 
-/* 주문 버튼 리플 효과 */
-.btn-danger {
-    position: relative;
-    overflow: hidden;
+/* =======================================================================
+   상품 썸네일
+   - 일정 크기 고정
+   - 둥근 모서리
+   ======================================================================= */
+.thumb {
+	width: 45px;
+	height: 45px;
+	object-fit: cover;
+	margin-right: 6px;
+	border-radius: var(--radius-thumb);
 }
 
-.btn-danger::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3);
-    transition: left 0.4s ease;
+/* =======================================================================
+   상품명 텍스트 스타일
+   ======================================================================= */
+.name {
+	font-size: var(--font-size-name);
+	line-height: 1.2;
 }
 
-.btn-danger:hover::after {
-    left: 100%;
+/* =======================================================================
+   제목 공통 스타일
+   - 장바구니, 섹션 제목 등에 사용
+   ======================================================================= */
+.title {
+	margin: 0;
+	font-size: var(--font-size-title);
+	font-weight: 600;
+	text-align: center;
 }
 
-/* 네비게이션 탭 언더라인 애니메이션 */
-.nav-tabs .nav-link {
-    position: relative;
-    overflow: hidden;
+/* =======================================================================
+   장바구니 제목 스타일
+   - 배경색 및 패딩 적용
+   - 상단 모서리 둥글게
+   ======================================================================= */
+.title.cart {
+	background-color: var(--color-cart-bg);
+	color: var(--color-background);
+	padding: 8px;
+	border-top-left-radius: var(--radius-container);
+	border-top-right-radius: var(--radius-container);
 }
 
-.nav-tabs .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: #dc3545;
-    transition: width 0.3s ease, left 0.3s ease;
+/* =======================================================================
+   "최근 본 상품" 섹션 제목
+   - 약간의 상단 여백 설정
+   ======================================================================= */
+.title.str {
+	margin-top: 5px;
 }
 
-.nav-tabs .nav-link:hover::after,
-.nav-tabs .nav-link.active::after {
-    width: 100%;
-    left: 0;
-}
-
-/* 탭 콘텐츠 슬라이드 인 */
-.start+.start {
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-
-.start.end+.end {
-    opacity: 1;
-    transform: translateX(0);
+/* =======================================================================
+   상단 이동 버튼
+   - 기본 버튼 스타일 초기화
+   - 너비 100% 적용
+   - 하단 모서리 둥글게
+   ======================================================================= */
+.topBtn {
+	all: unset;
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	padding: 6px 0;
+	text-align: center;
+	cursor: pointer;
+	background-color: var(--color-btn-bg);
+	font-size: var(--font-size-title);
+	border-bottom-left-radius: var(--radius-btn);
+	border-bottom-right-radius: var(--radius-btn);
 }

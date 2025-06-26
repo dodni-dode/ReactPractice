@@ -13,7 +13,7 @@ function ShopNavbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate('/detail/cart')}>Cart</Nav.Link>
+            <Nav.Link onClick={() => navigate('/cart')}>Cart</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => navigate('/action1')}>Action</NavDropdown.Item>
               <NavDropdown.Item onClick={() => navigate('/action2')}>Another action</NavDropdown.Item>

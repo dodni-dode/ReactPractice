@@ -5,7 +5,7 @@ import initialShoes from './data.jsx'
 import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import ShopNavbar from './components/ShopNavbar.jsx'
-import RecentlyViewed from './components/RecentlyViewed.jsx'
+import RecentlyWatched from './components/RecentlyWatched.jsx'
 import Detail from './pages/Detail.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
@@ -62,7 +62,7 @@ export default function App() {
 
   return (
     <>
-      <RecentlyViewed shoes={shoes} />
+      <RecentlyWatched shoes={shoes} />
       <ShopNavbar />
       <Routes>
         <Route
