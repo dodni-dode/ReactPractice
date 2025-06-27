@@ -26,6 +26,17 @@ const userWatched = createSlice({
   }
 })
 
+const Shoes = createSlice({
+  name: "shoes",
+  initialState: [],
+  reducers: {
+    // 상품 목록을 설정하는 리듀서
+    setShoes(state, action) {
+      return action.payload
+    }
+  }
+})
+
 export const { addWatchedId } = userWatched.actions
 
 // 루트 스토어 구성
