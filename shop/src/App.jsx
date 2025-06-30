@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from 'react'
+import React, { memo } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
